@@ -139,8 +139,8 @@ class HatebaseTwitter():
         train = pd.concat([X_train, y_train], axis=1).reset_index().drop('index', axis=1)
         test = pd.concat([X_test, y_test], axis=1).reset_index().drop('index', axis=1)
 
-        inputs_train = self.create_input_array(X_train)
-        inputs_test = self.create_input_array(X_test)
+        self.train = self.create_input_array(X_train)
+        self.test = self.create_input_array(X_test)
 
 
         # if verbose:
@@ -148,17 +148,17 @@ class HatebaseTwitter():
         #     print(f"Train data shape: {test.shape}")
         # train, test = map(lambda df: df.reindex(df[self.data_column].str.len().sort_values().index),
         #                   [train, test])
-        print(train.iloc[0])
-        self.train = train
-        self.test = test
-        ((self.train_x, self.train_y),
-         (self.test_x, self.test_y)) = map(self._prepare, [train, test])
-
-        if verbose: print("max seq_len", self.max_seq_len)
-        self.max_seq_len = min(self.max_seq_len, max_seq_len)
-        ((self.train_x, self.train_x_token_types),
-         (self.test_x, self.test_x_token_types)) = map(self._pad,
-                                                       [self.train_x, self.test_x])
+        # print(train.iloc[0])
+        # self.train = train
+        # self.test = test
+        # ((self.train_x, self.train_y),
+        #  (self.test_x, self.test_y)) = map(self._prepare, [train, test])
+        #
+        # if verbose: print("max seq_len", self.max_seq_len)
+        # self.max_seq_len = min(self.max_seq_len, max_seq_len)
+        # ((self.train_x, self.train_x_token_types),
+        #  (self.test_x, self.test_x_token_types)) = map(self._pad,
+        #                                                [self.train_x, self.test_x])
 
 
 
