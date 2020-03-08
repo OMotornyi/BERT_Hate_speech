@@ -133,17 +133,15 @@ class HatebaseTwitter():
         do_lower_case = self.bert_layer.resolved_object.do_lower_case.numpy()
         self.tokenizer = FullTokenizer(vocab_file, do_lower_case)
         self.df[self.data_column] = self.df[self.data_column].apply(lambda x: preprocess(x))
-        X_train, X_test, y_train, y_test = train_test_split(self.df.drop(self.label_column,axis=1), self.df[self.label_column],
+        X_train, X_test, y_train, y_test = train_test_split(self.df[self.data_column], self.df[self.label_column],
                                                             test_size=test_size,
                                                             random_state=100, stratify=self.df[self.label_column])
-        train = pd.concat([X_train, y_train], axis=1).reset_index().drop('index', axis=1)
-        test = pd.concat([X_test, y_test], axis=1).reset_index().drop('index', axis=1)
+#        train = pd.concat([X_train, y_train], axis=1).reset_index().drop('index', axis=1)
+ #       test = pd.concat([X_test, y_test], axis=1).reset_index().drop('index', axis=1)
 
-        input_test = self.create_input_array(X_train)
-        input_train = self.create_input_array(X_test)
 
-        self.train = input_train
-        self.test = input_test
+        self.train = self.create_input_array(X_train)
+        self.test = self.create_input_array(X_test)
 
 
         # if verbose:
