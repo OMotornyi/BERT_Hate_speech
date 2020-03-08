@@ -108,7 +108,7 @@ class HatebaseTwitter():
 
         return ids, masks, segments
 
-    def create_input_array(self,sentences):
+    def create_input_array(self, sentences):
 
         input_ids, input_masks, input_segments = [], [], []
 
@@ -139,8 +139,11 @@ class HatebaseTwitter():
         train = pd.concat([X_train, y_train], axis=1).reset_index().drop('index', axis=1)
         test = pd.concat([X_test, y_test], axis=1).reset_index().drop('index', axis=1)
 
-        self.train = self.create_input_array(X_train)
-        self.test = self.create_input_array(X_test)
+        input_test = self.create_input_array(X_train)
+        input_train = self.create_input_array(X_test)
+
+        self.train = input_train
+        self.test = input_test
 
 
         # if verbose:
